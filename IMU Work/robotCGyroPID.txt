@@ -1,0 +1,31 @@
+void gyroPid (kp, ki, kd, time, tp){
+int Kp = kp;
+
+int Ki = ki;
+int integral = 0;
+
+int Kd = kd;
+int lastError = 0;
+int derivative = 0;
+
+int Tp = tp;
+int Turn = 0;
+int error = 0;
+int gyroSensor = 0;
+while(true){
+gyroSensor = SensorValue[gryoSensor];
+
+error = gyroSensor;
+integral = ((2/3)*integral) + error;
+derivative = error - lastError;
+
+Turn = (Kp*error) + (Ki*integral) + (Kd*derivative);
+motor[motorB] = (Tp-Turn);
+motor[motorC] = (Tp+Turn);
+
+lastError = error;
+}
+}
+
+PID: 0.7, 0.01, 20, 25, 60
+P: 1, 0, 0, 25, 60
